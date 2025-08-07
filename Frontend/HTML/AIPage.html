@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NeuroVoice AI Analyzer</title>
+  <link rel="stylesheet" href="../css/AIPageStyles.css" />
+</head>
+<body>
+  <header>
+    <h1>
+      <a href="#">NeuroVoice</a>
+    </h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">AI</a>
+      <a href="#">Login</a>
+      <a href="#">Sign up</a>
+
+    </nav>
+  </header>
+  <main>
+    <div class="card upload-card">
+      <label for="audioFile">Upload Speech File:</label>
+      <input type="file" id="audioFile" accept="audio/*" />
+      <button id="analyzeBtn" class="btn btn-primary" disabled>Analyze</button>
+      <div class="progress-bar" id="progressBar">
+        <div class="progress" id="progress"></div>
+      </div>
+    </div>
+    <div class="card result-card hidden" id="resultCard">
+      <h2 id="resultLabel">🚩 Alzheimer Detected</h2>
+      <p class="confidence" id="confidenceText">Confidence: 92%</p>
+      <button class="btn-outline" id="reAnalyzeBtn">Re-analyze</button>
+    </div>
+  </main>
+  <footer>© 2025 NeuroVoice</footer>
+</body>
+</html>
