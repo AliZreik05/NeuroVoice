@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Verify Code{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/VerifyCodeStyles.css')}}">
+{% endblock %}
+{% block content %}
+<body style="background-image: url('{{url_for('static', filename='img/LoginAndRegister.png')}}')">
+  <h1 class="Name-Of-Company">NeuroVoice</h1>
+  <h2 class="tagline">Early Insight for a Brighter Memory.</h2>
+  <div class="container">
+    <form id="loginForm" action="{{ url_for('verify_code') }}" method="POST">
+      
+      <h2>Enter the code sent to your email</h2>
+      <input type="hidden" id="token" name="token">
+      <div class="error" id="error"></div>
+      <div class="input-box">
+        <input type="text" id="verificationCode" name="code" placeholder="Code" required>
+      </div>
+      <button type="submit">Verify</button>
+    </form>
+  </div>
+</body>
+{% endblock %}

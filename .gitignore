@@ -1,0 +1,39 @@
+# --- Python cache and compiled files ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*$py.class
+
+# --- Virtual environment ---
+venv/
+env/
+.venv/
+ENV/
+
+# --- Environment variables ---
+.env
+.env.*
+
+# --- SQLite database ---
+*.sqlite
+*.sqlite3
+site.db
+
+# --- Flask instance folder (uploads, local files) ---
+instance/
+*.db
+*.db-journal
+
+# --- OS-generated files ---
+.DS_Store
+Thumbs.db
+
+# --- PyInstaller / build artifacts ---
+build/
+dist/
+*.spec
+
+# --- Logs ---
+*.log
+logs/

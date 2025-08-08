@@ -1,17 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/RegisterStyles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <title>Register Page</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/RegisterStyles.css') }}">
+{% endblock %}
+{% block content %}
+<body style="background-image: url('{{url_for('static', filename='img/LoginAndRegister.png')}}')">
   <h1 class="Name-Of-Company">NeuroVoice</h1>
   <h2 class="tagline">Early Insight for a Brighter Memory.</h2>
   <div class="container">
-    <form id="loginForm" action="/register" method="POST">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div style="margin-bottom: 16px;">
+        {% for cat, msg in messages %}
+          <div style="font-weight: 700; color: red;">{{ msg }}</div>
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <form id="loginForm" action="{{ url_for('register') }}" method="POST">
       <h2>Register</h2>
       <div class="error" id="error"></div>
       <div class="input-box">
@@ -33,6 +39,4 @@
       <button type="submit">Register</button>
     </form>
   </div>
-</body>
-
-</html>
+{% endblock %}
