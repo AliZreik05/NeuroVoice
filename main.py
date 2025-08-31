@@ -80,9 +80,7 @@ def generate_numeric_code(n=6) -> str:
 # ---------- Routes ----------
 @app.route("/")
 def index():
-    if current_user.is_authenticated:
-        return f"Hello, {current_user.email}! <a href='{url_for('logout')}'>Logout</a>"
-    return "Hello! <a href='/login'>Login</a> | <a href='/register'>Register</a> | <a href='/reset'>Reset Password</a>"
+    return render_template("LandingPage.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():

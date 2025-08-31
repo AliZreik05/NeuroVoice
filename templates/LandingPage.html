@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block title %}NeuroVoice | Early Insight for a Brighter Memory{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/LandingPageStyles.css') }}">
+{% endblock %}
+{% block content %}
+<body>
+  <header class="hero">
+    <div class="container hero__inner">
+      <h1 class="hero__title">Detect Alzheimer's from Speech</h1>
+      <p class="hero__subtitle">
+        Our LLM-powered AI model analyzes your speech to detect early signs of Alzheimer’s —
+        fast, accurate, and non-invasive.
+      </p>
+      <div class="hero__actions">
+        <a href="#cta" class="btn btn--solid">Try the Demo</a>
+        <a href="#learn" class="btn btn--outline">Learn More</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- How It Works -->
+    <section class="section section--tight" id="how">
+      <div class="container">
+        <h2 class="section__title">How It Works</h2>
+        <div class="grid grid--three">
+          <article class="card card--lift">
+            <h3 class="card__title">1. Record Your Voice</h3>
+            <p class="card__text">Use your device to record a short voice sample securely.</p>
+          </article>
+          <article class="card card--lift">
+            <h3 class="card__title">2. Upload &amp; Analyze</h3>
+            <p class="card__text">Submit your voice and let our LLM analyze patterns linked to cognitive decline.</p>
+          </article>
+          <article class="card card--lift">
+            <h3 class="card__title">3. Get Results</h3>
+            <p class="card__text">Receive instant, research-backed feedback and recommendations.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why It Matters -->
+    <section class="section section--muted center" id="learn">
+      <div class="container">
+        <h2 class="section__title">Why Early Detection Matters</h2>
+        <p class="lead">
+          Alzheimer's is most treatable in its earliest stages. Our technology empowers individuals and caregivers
+          by offering a fast and accessible screening tool — anytime, anywhere.
+        </p>
+        <a href="{{ url_for('inputPage') }}" class="btn btn--solid btn--brand">Join the Mission</a>
+      </div>
+    </section>
+
+    <!-- Backed by Research -->
+    <section class="section section--tight">
+      <div class="container narrow">
+        <h2 class="section__title">Backed by Research</h2>
+        <p class="lead">
+          Our model has been validated on clinical datasets with over 90% accuracy in detecting early signs of Alzheimer’s.
+        </p>
+        <div class="grid grid--two">
+          <article class="card card--lift">
+            <h4 class="card__title">90%+ Accuracy</h4>
+            <p class="card__text">Achieved using voice samples tested against benchmark datasets.</p>
+          </article>
+          <article class="card card--lift">
+            <h4 class="card__title">LLM-Based Model</h4>
+            <p class="card__text">Utilizes the latest advancements in language and speech modeling.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="cta">
+      <div class="container cta__inner">
+        <h2 class="cta__title">Be Part of the Change</h2>
+        <p class="cta__text">
+          Help us improve early Alzheimer’s detection. Try the tool, give feedback, or join our research network.
+        </p>
+        <a href="{{ url_for('inputPage') }}" class="btn btn--inverted">Get Started</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> NeuroVoice. All rights reserved.</p>
+      <nav class="footer__nav">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="https://github.com/AliZreik05/NeuroVoice">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+{% endblock %}
