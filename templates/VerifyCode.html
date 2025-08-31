@@ -8,6 +8,15 @@
   <h1 class="Name-Of-Company">NeuroVoice</h1>
   <h2 class="tagline">Early Insight for a Brighter Memory.</h2>
   <div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          <div style="margin-bottom: 16px;">
+              {% for cat, msg in messages %}
+              <div style="font-weight: 700; color: red;">{{ msg }}</div>
+              {% endfor %}
+          </div>
+      {% endif %}
+    {% endwith %}
     <form id="loginForm" action="{{ url_for('verify_code') }}" method="POST">
       
       <h2>Enter the code sent to your email</h2>
