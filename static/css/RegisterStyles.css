@@ -46,7 +46,7 @@ h1{
     text-align: center;
     backdrop-filter: blur(9px);
     z-index: 1;
-    margin-top: 120px;
+    margin-top: 150px;
 }
 
 .container h2{
@@ -64,9 +64,17 @@ h1{
 .input-box{
     position: relative;
     width: 100%;
-    height: 35px;
     margin: 20px 0;
 }
+
+.input-box:focus-within .tooltip {
+  display: block;
+}
+
+.input-box:hover .tooltip {
+  display: block;
+}
+
 .tooltip {
     position: absolute;
     top: 110%; 
@@ -84,36 +92,43 @@ h1{
     z-index: 10;
 }
 
+.tooltip a {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
 #mmse:focus + i + .tooltip {
     display: block;
 }
 
-.input-box input{
+.input-box input,
+.input-box select{
     width: 100%;
-    height: 100%;
+    height: 43px;             
+    box-sizing: border-box;     
     background: transparent;
     border: 2px solid black;
     outline: none;
     border-radius: 45px;
     font-size: 17px;
     color: black;
-    padding: 20px 45px 20px 20px;
-    
+    padding: 0 45px 0 20px;      
 }
-.input-box select
-{
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: 2px solid black;
-    outline: none;
-    border-radius: 45px;
-    font-size: 17px;
-    color: black;
-    padding: 0 45px 0 20px;
-    appearance: none; 
+
+.input-box select{
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+}
+
+.input-box i{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    line-height: 1;             
+    pointer-events: none;      
 }
 
 .input-box select::placeholder{
@@ -124,13 +139,6 @@ h1{
     color:  black;
 }
 
-.input-box i{
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-}
 
 button {
     width: 90%;
