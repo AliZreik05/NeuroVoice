@@ -2,9 +2,13 @@
 {% block title %}Register{% endblock %}
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/RegisterStyles.css') }}">
+<style>
+  body {
+    background-image: url("{{ url_for('static', filename='img/LoginAndRegister.png') }}");
+  }
+</style>
 {% endblock %}
 {% block content %}
-<body style="background-image: url('{{url_for('static', filename='img/LoginAndRegister.png')}}')">
   <h1 class="Name-Of-Company">NeuroVoice</h1>
   <h2 class="tagline">Early Insight for a Brighter Memory.</h2>
   <div class="container">
@@ -37,6 +41,17 @@
         <i class="fas fa-lock"></i>
       </div>
       <div class="input-box">
+        <input type="number" id="age" name="age" placeholder="Age" required>
+        <i class="fas fa-calendar-days"></i>
+      </div>
+      <div class="input-box">
+        <input type="number" id="mmse" name="mmse" placeholder="MMSE Score" required>
+        <i class="fas fa-envelope"></i>
+         <div class="tooltip">
+          You can obtain your MMSE score from your doctor or a licensed neuropsychologist or alternatively you can head to https://mmse.neurol.ru/ and take a test there.
+        </div>
+      </div>
+      <div class="input-box">
         <select id="sex" name="sex" required>
           <option value="" disabled selected hidden>Sex</option>
           <option value="1">Male</option>
@@ -44,14 +59,7 @@
         </select>
         <i class="fas fa-venus-mars"></i>
       </div>
-      <div class="input-box">
-        <input type="number" id="age" name="age" placeholder="Age" required>
-        <i class="fas fa-calendar-days"></i>
-      </div>
-      <div class="input-box">
-        <input type="number" id="mmse" name="mmse" placeholder="MMSE Score" required>
-        <i class="fas fa-envelope"></i>
-      </div>
+      
       <button type="submit">Register</button>
     </form>
   </div>
