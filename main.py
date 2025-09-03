@@ -1,3 +1,5 @@
+from api import api
+from flask_migrate import Migrate
 from datetime import datetime, timedelta
 import os, secrets, re
 from email_validator import validate_email, EmailNotValidError
@@ -10,11 +12,19 @@ from flask_mail import Mail, Message
 
 load_dotenv()
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
+    app.register_blueprint(api)
+    app.config["MAX_CONTENT_LENGTH"] = 30 * 1024 * 1024  # 30MB cap
+    return app
+
+app = create_app()
+
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-secret-change-me")
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL', 'sqlite:///test.db')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 587
