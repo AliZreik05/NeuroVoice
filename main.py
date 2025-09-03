@@ -35,6 +35,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), unique=True, index=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    sex = db.Column(db.String(1), default='M')
+    age = db.Column(db.Integer)
+    mmse_score = db.Column(db.Integer)
 
     def set_password(self, pw):
         self.password_hash = generate_password_hash(pw)
@@ -89,6 +92,9 @@ def register():
         username = request.form.get("username", "").strip().lower()
         password = request.form.get("password", "")
         confirmPassword = request.form.get("confirmPassword", "")
+        sex = request.form.get("sex", "").strip().lower()
+        age = request.form.get("age", "").strip().lower()
+        mmse_score = request.form.get("mmse", "").strip().lower()
 
         try:
             validate_email(email)
@@ -112,7 +118,7 @@ def register():
             flash("Username already used.", "warning")
             return redirect(url_for("register"))
 
-        user = User(email=email, username=username)
+        user = User(email=email, username=username, sex=sex, age=age, mmse_score=mmse_score)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
@@ -258,7 +264,7 @@ def set_new_password():
     return render_template('ResetVerify.html', email=user.email)
 
 
-@app.route("/input")
+@app.route("/ai")
 def inputPage():
     if current_user.is_authenticated:
         return render_template('AIPage.html')

@@ -1,22 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NeuroVoice AI Analyzer</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/AIPageStyles.css') }}" />
-</head>
+{% extends 'base.html' %}
+{% block title %}NeuroVoice AI{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/AIPageStyles.css') }}">
+{% endblock %}
+{% block content %}
 <body>
   <header>
-    <h1>
-      <a href="#">NeuroVoice</a>
-    </h1>
+    <a href="{{ url_for('index') }}">
+      <div class="brand">
+        <img src="{{ url_for('static', filename='img/icon.png') }}" class="logo">
+        <span class="brand-text">NeuroVoice</span>
+      </div>
+    </a>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">AI</a>
-      <a href="#">Login</a>
-      <a href="#">Sign up</a>
-
+      {% if current_user.is_authenticated %}
+      <a href="{{ url_for('logout') }}">Logout</a>
+      {% else %}
+      <a href="{{ url_for('login') }}">Login</a>
+      <a href="{{ url_for('register') }}">Sign up</a>
+      {% endif %}
     </nav>
   </header>
   <main>
@@ -35,5 +37,4 @@
     </div>
   </main>
   <footer>© 2025 NeuroVoice</footer>
-</body>
-</html>
+{% endblock %}

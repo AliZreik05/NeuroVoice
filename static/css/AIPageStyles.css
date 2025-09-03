@@ -158,3 +158,19 @@ footer
   font-size: 0.875rem;
   flex-shrink: 0;
 }
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand .logo {
+  height: 2em;
+  width: auto;
+  margin-right: 0.4em;
+}
+
+.brand .brand-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
