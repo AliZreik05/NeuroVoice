@@ -1,40 +1,132 @@
 {% extends 'base.html' %}
-{% block title %}NeuroVoice AI{% endblock %}
+{% block title %}NeuroVoice | Analyze Speech{% endblock %}
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/AIPageStyles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/LandingPageStyles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/AIPageStyles.css') }}">
 {% endblock %}
+
 {% block content %}
-<body>
-  <header>
-    <a href="{{ url_for('index') }}">
-      <div class="brand">
-        <img src="{{ url_for('static', filename='img/icon.png') }}" class="logo">
-        <span class="brand-text">NeuroVoice</span>
-      </div>
+<header class="sitebar">
+  <div class="container sitebar__inner">
+    <a href="{{ url_for('index') }}" class="brand">
+      <img src="{{ url_for('static', filename='img/icon.png') }}" class="brand__logo" alt="NeuroVoice logo">
+      <span class="brand__text">NeuroVoice</span>
     </a>
-    <nav>
+    <nav class="sitebar__nav">
       {% if current_user.is_authenticated %}
-      <a href="{{ url_for('logout') }}">Logout</a>
+        <a href="{{ url_for('logout') }}" class="link">Logout</a>
       {% else %}
-      <a href="{{ url_for('login') }}">Login</a>
-      <a href="{{ url_for('register') }}">Sign up</a>
+        <a href="{{ url_for('login') }}" class="link">Login</a>
+        <a href="{{ url_for('register') }}" class="btn btn--brand">Sign up</a>
       {% endif %}
     </nav>
-  </header>
-  <main>
-    <div class="card upload-card">
-      <label for="audioFile">Upload Speech File:</label>
-      <input type="file" id="audioFile" accept=".wav,.flac,.aif,.aiff,.aifc" name="audio"/>
-      <button id="analyzeBtn" class="btn btn-primary" disabled>Analyze</button>
-      <div class="progress-bar" id="progressBar">
-        <div class="progress" id="progress"></div>
+  </div>
+</header>
+
+<section class="hero hero--compact">
+  <div class="container hero__inner">
+    <h1 class="hero__title">Analyze Your Speech</h1>
+    <p class="hero__subtitle">Securely upload an audio file. Our model detects early signs of Alzheimer's from speech.</p>
+  </div>
+</section>
+
+<main>
+  <section class="section section--tight">
+    <div class="container narrow ai-container">
+      <div class="grid ai-grid">
+        <!-- Upload card -->
+        <article class="card card--lift" id="uploadCard">
+          <h2 class="card__title">Upload Speech File</h2>
+          <p class="card__text">Accepted: .wav, .flac, .aif, .aiff, .aifc, .m4a (≤ ~50MB)</p>
+
+          <div class="upload">
+            <!-- Hidden native input -->
+            <input
+              type="file"
+              id="audioFile"
+              name="audio"
+              accept=".wav,.flac,.aif,.aiff,.aifc,.m4a"
+              class="upload__input-hidden"
+            />
+            <!-- Pretty trigger button -->
+            <label for="audioFile" class="upload__button">
+              Choose audio file
+            </label>
+            <!-- Filename preview -->
+            <span id="fileName" class="upload__filename">No file chosen</span>
+
+            <button id="analyzeBtn" class="btn btn--brand upload__cta" disabled>Analyze</button>
+
+            <div class="progress" id="progressBar" aria-hidden="true">
+              <div class="progress__bar" id="progress"></div>
+            </div>
+            <p class="progress__hint" id="progressHint" hidden>Uploading & processing…</p>
+          </div>
+        </article>
+
+        <!-- Result card -->
+        <article class="card card--lift result hidden" id="resultCard" aria-live="polite">
+          <div class="result__header">
+            <h2 class="result__title" id="resultLabel">Result</h2>
+            <span class="badge" id="resultBadge">—</span>
+          </div>
+          <p class="result__confidence" id="confidenceText">Confidence: —</p>
+          <div class="result__actions">
+            <button class="btn btn--solid" id="reAnalyzeBtn">Re-analyze</button>
+            <button class="btn btn--solid" onclick="window.location.href='{{ url_for('inputPage') }}'">Upload another</button>
+          </div>
+        </article>
       </div>
     </div>
-    <div class="card result-card hidden" id="resultCard">
-      <h2 id="resultLabel">🚩 Alzheimer Detected</h2>
-      <p class="confidence" id="confidenceText">Confidence: 92%</p>
-      <button class="btn-outline" id="reAnalyzeBtn">Re-analyze</button>
+  </section>
+
+  <section class="section section--muted center">
+    <div class="container narrow">
+      <h3 class="section__title">Tips</h3>
+      <p class="lead">Record in a quiet room, speak naturally for 30–60s, prefer WAV for best quality.</p>
     </div>
-  </main>
-  <footer>© 2025 NeuroVoice</footer>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p>© <span id="year"></span> NeuroVoice. All rights reserved.</p>
+    <nav class="footer__nav">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="https://github.com/AliZreik05/NeuroVoice">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const analyzeBtn  = document.getElementById("analyzeBtn");
+  const fileInput   = document.getElementById("audioFile");
+  const fileNameEl  = document.getElementById("fileName");
+  const resultCard  = document.getElementById("resultCard");
+  const container   = document.querySelector(".ai-container");
+
+  // Show filename + enable Analyze
+  fileInput.addEventListener("change", () => {
+    const f = fileInput.files?.[0];
+    fileNameEl.textContent = f ? f.name : "No file chosen";
+    analyzeBtn.disabled = !f;
+  });
+
+  // Demo: show result + switch layout
+  analyzeBtn.addEventListener("click", () => {
+    resultCard.classList.remove("hidden");
+    container.classList.add("has-result");
+    document.getElementById("resultLabel").textContent = "🚩 Alzheimer Detected";
+    document.getElementById("confidenceText").textContent = "Confidence: 92%";
+    document.getElementById("resultBadge").textContent = "Positive";
+  });
+
+  // Optional: “Re-analyze” just scrolls back to top / resets (demo behavior)
+  document.getElementById("reAnalyzeBtn").addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
 {% endblock %}
