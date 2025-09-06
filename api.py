@@ -90,7 +90,7 @@ def predict():
 
         # Validate fields
         sex = 1 if current_user.sex == 'M' else 0
-        age = int(age)
+        age = int(current_user.age)
         mmse = current_user.mmse_score
 
         # Prepare a temp file for the transcription lib
