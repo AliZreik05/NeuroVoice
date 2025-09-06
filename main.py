@@ -127,6 +127,12 @@ def register():
         if User.query.filter_by(username=username).first():
             flash("Username already used.", "warning")
             return redirect(url_for("register"))
+        
+        try:
+            age = int(age)
+        except TypeError:
+            flash("Age format is invalid.")
+            return redirect(url_for("register"))
 
         user = User(email=email, username=username, sex=sex, age=age, mmse_score=mmse_score)
         user.set_password(password)
