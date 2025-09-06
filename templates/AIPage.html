@@ -99,34 +99,5 @@
   </div>
 </footer>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  const analyzeBtn  = document.getElementById("analyzeBtn");
-  const fileInput   = document.getElementById("audioFile");
-  const fileNameEl  = document.getElementById("fileName");
-  const resultCard  = document.getElementById("resultCard");
-  const container   = document.querySelector(".ai-container");
-
-  // Show filename + enable Analyze
-  fileInput.addEventListener("change", () => {
-    const f = fileInput.files?.[0];
-    fileNameEl.textContent = f ? f.name : "No file chosen";
-    analyzeBtn.disabled = !f;
-  });
-
-  // Demo: show result + switch layout
-  analyzeBtn.addEventListener("click", () => {
-    resultCard.classList.remove("hidden");
-    container.classList.add("has-result");
-    document.getElementById("resultLabel").textContent = "🚩 Alzheimer Detected";
-    document.getElementById("confidenceText").textContent = "Confidence: 92%";
-    document.getElementById("resultBadge").textContent = "Positive";
-  });
-
-  // Optional: “Re-analyze” just scrolls back to top / resets (demo behavior)
-  document.getElementById("reAnalyzeBtn").addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-</script>
+<script src="{{url_for('static', filename='js/ai.js')}}"></script>
 {% endblock %}
