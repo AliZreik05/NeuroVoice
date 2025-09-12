@@ -90,4 +90,4 @@ Open `Landing_Page/index.html` in your browser.
 
 ## Contact
 
-Created by **Kassem Moussawi**. For questions or collaborations, reach out via GitHub or email.
+Created by **Kassem Moussawi, Ali Zriek and Marc Nadim Zaaeny**. For questions or collaborations, reach out via GitHub or email.
